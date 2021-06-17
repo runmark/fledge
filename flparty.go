@@ -20,17 +20,17 @@ const K8S_PARTYID = "K8S_PARTYID"
 const TOPIC_NAME = "fl-party"
 
 type FlParty struct {
-	PartyId     string
-	PartyName   string
-	UpdateAt    time.Time
-	HeartBeatTs int64
-	BoardUrl    string
+	PartyId     string `json:"partyId"`
+	PartyName   string `json:"partyName"`
+	UpdateAt    time.Time `json:"updateTime"`
+	HeartBeatTs int64 `json:"heartbeatTs"`
+	BoardUrl    string `json:"boardUrl"`
 }
 
 func NewFlParty() *FlParty {
 
 	heartBeat := time.Now()
-	heartBeatTs := heartBeat.UnixNano()
+	heartBeatTs := heartBeat.Unix()
 
 	partyName, ok := os.LookupEnv(K8S_NAMESPACE)
 	if !ok {
